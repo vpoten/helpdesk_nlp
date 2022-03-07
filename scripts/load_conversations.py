@@ -10,9 +10,12 @@ import src.freshdesk.export_loader as export
 from config.config import API_TOKEN
 
 
+def _filename(out_path, ticket_id):
+    return os.path.join(out_path, f'{str(ticket_id)}.json')
+
+
 def save_conversation(out_path, ticket_id, data):
-    filename = os.path.join(out_path, f'{str(ticket_id)}.json')
-    with open(filename, "w") as file:
+    with open(_filename(out_path, ticket_id), "w") as file:
         json.dump(data, file, indent=4)
 
 
@@ -29,9 +32,11 @@ if __name__ == "__main__":
 
     # create download directory
     out_path = 'downloads/conversations'
-    os.makedirs(out_path)
+    os.makedirs(out_path, exist_ok=True)
 
     for ticket_id in ticket_ids:
+        if os.path.exists(_filename(out_path, ticket_id)):
+            continue
         try:
             data = client.get_ticket_conversations(ticket_id)
         except RequestException as err:
