@@ -127,3 +127,6 @@ Desktop.ini
 # Thumbnails
 ._*
 Thumbs.db
+
+# configuration
+config/config.py
