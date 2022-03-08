@@ -43,4 +43,4 @@ if __name__ == "__main__":
             print(f'Error downloading data for ticket [{ticket_id}]: {str(err)}')
         else:
             save_conversation(out_path, ticket_id, data)
-            time.sleep(0.001)
+            time.sleep(0.05)  # sleep to not exceed the rate limit
