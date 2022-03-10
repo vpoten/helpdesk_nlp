@@ -1,5 +1,10 @@
-import pandas
+import os
 import pandas as pd
+import json
+
+ID = 'Ticket ID'
+GROUP = 'Group'
+STATUS = 'Status'
 
 
 def load_export(path: str = None):
@@ -10,13 +15,19 @@ def load_export(path: str = None):
     return df
 
 
-def get_ticket_ids(df: pandas.DataFrame):
-    return df['Ticket ID'].to_list()
+def get_ticket_ids(df: pd.DataFrame):
+    return df[ID].to_list()
 
 
-def filter_by(df: pandas.DataFrame, status: list = None, group: list = None):
+def filter_by(df: pd.DataFrame, status: list = None, group: list = None):
     if status:
         df = df[df['Status'].isin(status)]
     if group:
         df = df[df['Group'].isin(group)]
     return df
+
+
+def load_conversation(ticket_id, base_path: str = None):
+    base_path = 'downloads/conversations' if base_path is None else base_path
+    with open(os.path.join(base_path, f'{str(ticket_id)}.json'), 'r') as fp:
+        return json.load(fp)
