@@ -2,20 +2,20 @@ from enum import Enum
 
 
 class TicketClasses(Enum):
-    rest = 0
-    billing = 1
-    customer_care = 2
-    development = 3
-    dev_ateam = 4
-    dev_avengers = 5
-    dev_gondor = 6
-    dev_mordor = 7
-    dev_plugins = 8
-    dev_be = 9
-    dev_fe = 10
-    dev_triage = 11
-    first_resp = 12
-    internal = 13
+    rest = '0'
+    billing = '1'
+    customer_care = '2'
+    development = '3'
+    dev_ateam = '4'
+    dev_avengers = '5'
+    dev_gondor = '6'
+    dev_mordor = '7'
+    dev_plugins = '8'
+    dev_be = '9'
+    dev_fe = '10'
+    dev_triage = '11'
+    first_resp = '12'
+    internal = '13'
 
 
 CLASS_DIRECT = {

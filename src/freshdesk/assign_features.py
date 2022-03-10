@@ -1,9 +1,11 @@
+import csv
 import os.path
 import pandas as pd
 
 import export_loader as export_loader
 import src.definitions.group_class as group_class
 from src.nlp.language_detector import detect_language
+from src.nlp.cleaning import clean_text
 
 ID = export_loader.ID
 GROUP = export_loader.GROUP
@@ -36,21 +38,26 @@ def get_message_text(message):
 def _build_features(ticket_id, row):
     group = row.iloc[0][GROUP]
     status = row.iloc[0][STATUS]
-    message = export_loader.load_ticket(ticket_id)
-    text = get_message_text(message)
+    try:
+        message = export_loader.load_ticket(ticket_id)
+    except FileNotFoundError:
+        message = None
+    raw_text = get_message_text(message)
+    text = None if raw_text is None else clean_text(raw_text)
     language = get_language(text)
     c1 = get_class1(group)
     c2 = get_class2(group)
     c3 = get_class3(group)
+
     return {
         'id': ticket_id,
         'status': status,
         'group': group,
         'language': language,
         'text': text,
-        'c1': c1,
-        'c2': c2,
-        'c3': c3,
+        'c1': None if c1 is None else c1.value,
+        'c2': None if c2 is None else c2.value,
+        'c3': None if c3 is None else c3.value,
     }
 
 
@@ -74,7 +81,7 @@ def save_patterns(patterns: list, base_path: str = None):
 
 
 if __name__ == "__main__":
-    c = export_loader.load_conversation('56929')
+    c = export_loader.load_ticket('56929')
     print(c)
     patterns = build_patterns()
     print(patterns[0])
