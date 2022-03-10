@@ -31,3 +31,9 @@ def load_conversation(ticket_id, base_path: str = None):
     base_path = 'downloads/conversations' if base_path is None else base_path
     with open(os.path.join(base_path, f'{str(ticket_id)}.json'), 'r') as fp:
         return json.load(fp)
+
+
+def load_ticket(ticket_id, base_path: str = None):
+    base_path = 'downloads/tickets' if base_path is None else base_path
+    with open(os.path.join(base_path, f'{str(ticket_id)}.json'), 'r') as fp:
+        return json.load(fp)

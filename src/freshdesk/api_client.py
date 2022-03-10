@@ -19,3 +19,9 @@ class ApiClient(object):
         r = self.session.get(endpoint)
         r.raise_for_status()
         return r.json()
+
+    def get_ticket(self, ticket_id):
+        endpoint = f'{self.api_url}/tickets/{str(ticket_id)}'
+        r = self.session.get(endpoint)
+        r.raise_for_status()
+        return r.json()
