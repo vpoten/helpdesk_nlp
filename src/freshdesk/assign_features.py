@@ -81,6 +81,9 @@ def save_patterns(patterns: list, base_path: str = None):
 
 
 if __name__ == "__main__":
+    """
+    This script builds the dataset using the freshdesk ticket export summary (index) and single ticket downloads
+    """
     c = export_loader.load_ticket('56929')
     print(c)
     patterns = build_patterns()

@@ -15,6 +15,10 @@ def filter_dataset(df):
 
 
 if __name__ == "__main__":
+    """
+    This script loads the dataset and generates a clean version by applying some filters:
+    (english, not null class, not null text)
+    """
     df1 = load_dataset()
     print(df1.shape)
     df2 = filter_dataset(df1)
