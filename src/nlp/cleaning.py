@@ -49,7 +49,7 @@ def list_of_unigrams(text_column):
     """
     Creates a list of list of unigrams
 
-    :param text_column: pd.Series containing preprocessed strings
+    :param text_column: {pd.Series} containing preprocessed strings
     :return: list of list
     """
     lst_corpus = []
